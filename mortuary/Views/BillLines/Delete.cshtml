@@ -1,0 +1,72 @@
+﻿@model mortuary.Models.BillLine
+
+@{
+    ViewBag.Title = mortuary.i18n.i18n.Delete;
+}
+
+<h2>@mortuary.i18n.i18n.Delete</h2>
+
+<h3>@mortuary.i18n.i18n.ConfirmDelete</h3>
+<div>
+    <h4>BillLine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxesPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxesPercentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subtotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@mortuary.i18n.i18n.Delete class="btn btn-secondary" /> | <a href=@ViewBag.PreviousURL>@mortuary.i18n.i18n.Back</a>
+        </div>
+    }
+</div>

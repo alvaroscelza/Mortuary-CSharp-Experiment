@@ -1,0 +1,79 @@
+﻿@model IEnumerable<mortuary.Models.Product>
+
+@{
+    ViewBag.Title = mortuary.i18n.i18n.Products;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink(mortuary.i18n.i18n.CreateNew, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuyPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientTaxesPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Provider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SellPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuyPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientTaxesPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provider.Name)
+        </td>
+        <td>
+            @{
+                var base64 = Convert.ToBase64String(item.Image);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img src="@imgSrc" height="100" width="100"/>
+        </td>
+        <td>
+            @Html.ActionLink(mortuary.i18n.i18n.Edit, "Edit", new { id = item.Id }) |
+            @Html.ActionLink(mortuary.i18n.i18n.Details, "Details", new { id = item.Id }) |
+            @Html.ActionLink(mortuary.i18n.i18n.Delete, "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

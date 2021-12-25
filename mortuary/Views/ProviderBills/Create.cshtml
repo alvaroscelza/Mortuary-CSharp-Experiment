@@ -1,0 +1,108 @@
+﻿@model mortuary.Models.ProviderBill
+
+@{
+    ViewBag.Title = mortuary.i18n.i18n.Create;
+}
+
+<h2>@mortuary.i18n.i18n.Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@mortuary.i18n.i18n.ProviderBill</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ProviderId, (IEnumerable<SelectListItem>)ViewBag.Providers, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalToPay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="total-input" name="total-input" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <h4>@mortuary.i18n.i18n.BillLines</h4>
+            <hr />
+
+            @Html.ValidationMessageFor(model => model.BillLines, "", new { @class = "text-danger" })
+
+            <input id="total-rows" name="total-rows" value="0" hidden />
+
+            <div class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a href="#!" class="text-success">@mortuary.i18n.i18n.AddRow</a>
+                </span>
+                <table id="table" class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                        <th class="text-center" style="width: 20%">@mortuary.i18n.i18n.Product</th>
+                        <th class="text-center" style="width: 15%">@mortuary.i18n.i18n.Notes</th>
+                        <th class="text-center" style="width: 10%">@mortuary.i18n.i18n.Amount</th>
+                        <th class="text-center" style="width: 15%">@mortuary.i18n.i18n.Price</th>
+                        <th class="text-center" style="width: 10%">@mortuary.i18n.i18n.TaxesPercentage</th>
+                        <th class="text-center" style="width: 15%">@mortuary.i18n.i18n.Subtotal</th>
+                        <th class="text-center" style="width: 15%"></th>
+                    </tr>
+                    <tr id="clonable-row" hidden>
+                        <td>
+                            <select id="clonable-product-select" class="custom-select">
+                                @foreach (var product in ViewBag.Products)
+                                {
+                                    <option value=@product.Id price=@product.SellPrice taxes=@product.ClientTaxesPercentage>@product.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <td><input id="clonable-notes-input" class="form-control" /></td>
+                        <td><input id="clonable-amount-input" class="form-control" type="number" step="1" value="1" /></td>
+                        <td><input id="clonable-price-input" class="form-control" type="number" min="0" /></td>
+                        <td><input id="clonable-taxes-input" class="form-control" type="number" min="0" max="100" /></td>
+                        <td><input id="clonable-subtotal-input" class="form-control" readonly /></td>
+                        <td>
+                            <button type="button" class="table-remove btn btn-danger btn-rounded btn-sm my-0">@mortuary.i18n.i18n.Remove</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=@mortuary.i18n.i18n.Create class="btn btn-secondary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(mortuary.i18n.i18n.BackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bill-lines")
+}

@@ -1,0 +1,86 @@
+﻿@model mortuary.Models.Product
+
+@{
+    ViewBag.Title = mortuary.i18n.i18n.Details;
+}
+
+<h2>@mortuary.i18n.i18n.Details</h2>
+
+<div>
+    <h4>@mortuary.i18n.i18n.Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuyPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientTaxesPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientTaxesPercentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Provider)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provider.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @{
+                var base64 = Convert.ToBase64String(Model.Image);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img src="@imgSrc" height="100" width="100" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(mortuary.i18n.i18n.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(mortuary.i18n.i18n.BackToList, "Index")
+</p>

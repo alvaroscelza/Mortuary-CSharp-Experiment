@@ -1,0 +1,80 @@
+﻿@model mortuary.Models.ClientBill
+
+@{
+    ViewBag.Title = mortuary.i18n.i18n.Delete;
+}
+
+<h2>@mortuary.i18n.i18n.Delete</h2>
+
+<h3>@mortuary.i18n.i18n.ConfirmDelete</h3>
+<div>
+    <h4>@mortuary.i18n.i18n.ClientBill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalToPay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalToPay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+    </dl>
+
+    <h4>@mortuary.i18n.i18n.BillLines</h4>
+    <hr />
+
+    <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+            <th class="text-center" style="width: 20%">@mortuary.i18n.i18n.Product</th>
+            <th class="text-center" style="width: 20%">@mortuary.i18n.i18n.Notes</th>
+            <th class="text-center" style="width: 10%">@mortuary.i18n.i18n.Amount</th>
+            <th class="text-center" style="width: 15%">@mortuary.i18n.i18n.Price</th>
+            <th class="text-center" style="width: 10%">@mortuary.i18n.i18n.TaxesPercentage</th>
+            <th class="text-center" style="width: 15%">@mortuary.i18n.i18n.Subtotal</th>
+        </tr>
+        @foreach (var line in Model.BillLines)
+        {
+            <tr>
+                <td>@line.Product.Name</td>
+                <td>@line.Notes</td>
+                <td>@line.Amount</td>
+                <td>@line.Price</td>
+                <td>@line.TaxesPercentage</td>
+                <td>@line.Subtotal</td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@mortuary.i18n.i18n.Delete class="btn btn-secondary" /> | @Html.ActionLink(mortuary.i18n.i18n.BackToList, "Index")
+        </div>
+    }
+</div>
